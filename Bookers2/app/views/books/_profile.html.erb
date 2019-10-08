@@ -1,0 +1,41 @@
+<div class='col-xs-3'>
+  <h2>User info</h2>
+  <%= attachment_image_tag books.user, :profile_image,　format: 'jpg', fallback: "NoImage.jpg", size: "100x100" %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>name</th>
+          <th><%= books.user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= books.user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
+  <%= link_to "", edit_user_path(books.user.id), class: 'col-xs-12 btn btn-default glyphicon glyphicon-wrench' %>
+  <h2>New Book</h2>
+    <%= form_for(book, url: books_path, html: {class: 'new_nook', id: 'new_book'}) do |f| %>
+      <% if book.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+            <ul>
+              <% book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+        </div>
+      <% end %>
+      <div class="field row">
+        <label for="book_title">Title</label>
+        <%= f.text_field :title, :class => 'col-xs-12 book_title' %>
+      </div>
+      <div class="field row">
+        <label for="book_opinion">Opinion</label>
+        <%= f.text_area :body, :class => 'col-xs-12 book_title' %>
+      </div>
+      <div class="actions row">
+        <%= f.submit 'Create Book', :class => 'btn btn-primary col-xs-12' %>
+      </div>
+    <% end %>
+</div>
